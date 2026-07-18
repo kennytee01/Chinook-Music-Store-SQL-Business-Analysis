@@ -39,7 +39,8 @@ than assuming it was an error: each pair had a different track ID and a
 different length, so these are legitimate separate recordings that happen
 to share a name, not duplicate data entry. Nothing was removed.
 
-Full detail is in `Data_Quality_Summary.txt`.
+Full detail is in 
+| [`data_quality_summary.txt`](./data_duality_summary.txt) | Written summary of audit findings |
 
 
 ## What I found
@@ -52,7 +53,8 @@ which cuts concentration risk but also means there isn't much extra upside
 in chasing a handful of VIPs. A broader loyalty or upsell push across the
 mid-tier customer base is more likely to move the needle than a VIP-focused
 retention plan.
-| `chinook_top_spending_customers.sql` | Top customer analysis |
+
+| [`chinook_top_spending_customers.sql`](./chinook_top_spending_customers.sql) | Top customer analysis |
 
 
 **Genres.** Rock is the clear leader — 835 units sold, $826.65 in revenue,
@@ -63,7 +65,6 @@ unit of a standard track (~$1.99 vs ~$0.99). Volume alone would tell you to
 deprioritize these categories. Revenue-per-unit says the opposite — they're
 a premium category worth keeping in the pricing and catalog conversation on
 their own terms, not judged purely on unit count.
-| `chinook_top_selling_tracks_genres.sql` | Genre and track performance |
 
 At the track level, no single song is driving outsized revenue — the top 10
 tracks are all tied at 2-4 purchases each. Demand is spread across the
@@ -72,6 +73,8 @@ tracks ("Eruption," "Sure Know Something") are Rock, which lines up with
 Rock's lead at the genre level. The practical takeaway: marketing and
 curation decisions are better made at the genre level than by chasing
 individual "hit" tracks, since nothing here shows viral-level demand.
+
+| [`chinook_top_selling_tracks_genres.sql`](./chinook_top_selling_tracks_genres.sql) | Genre and track performance |
 
 **Revenue over time.** Monthly revenue holds remarkably steady across the
 full 2021-2025 window — roughly 7 orders and $37.62 in revenue per month,
@@ -84,7 +87,8 @@ activity. In a live business, I'd flag this pattern as worth investigating.
 Here, I'm flagging it as a known limitation of the dataset instead of
 dressing it up as a "stable business" story the data doesn't actually
 support.
-| `chinook_revenue_trend_over_time.sql` | Monthly/yearly revenue trend |
+
+| [`chinook_revenue_trend_over_time.sql`](./chinook_revenue_trend_over_time.sql) | Monthly/yearly revenue trend |
 
 **Purchasing behavior.** Every customer in the dataset places exactly 7
 orders. That one detail changes how you should read the "top spenders"
@@ -97,7 +101,6 @@ customer" recommendation. Here, that recommendation wouldn't hold up — the
 data can only really support average order value as a lever for
 differentiating customer value, so that's what I said, rather than forcing
 a conclusion the numbers don't back.
-| `chinook_purchasing__behavior.sql` | Order frequency, avg order value, revenue by country |
 
 One more thing worth flagging on country-level revenue: the USA generates
 the highest total revenue ($523.06), but that's simply because it has the
@@ -109,18 +112,71 @@ yet. I called this out specifically because it would be easy to
 misread as "expand into Czech Republic" when the sample size doesn't
 support that yet.
 
+| [`chinook_purchasing_behavior.sql`](./chinook_purchasing_behavior.sql) | Order frequency, avg order value, revenue by country |
+
+
+## Recommendations
+
+Here's what I'd actually tell the business owner, backed by what the data showed.
+
+**Top customers.** The top 10 customers by spend sit in a narrow $42.62–$49.62
+band, with no whale accounts. Since there's no concentration risk to protect
+against, the higher-leverage move is a broader loyalty or upsell push across
+the mid-tier customer base — that's where the real upside sits, not in
+chasing a handful of VIPs harder.
+
+**Genres.** Rock leads on volume (835 units, $826.65), but TV Shows and
+Drama earn almost double the revenue per unit of a standard track (~$1.99
+vs ~$0.99) despite much lower volume.
+Recommendation: test a modest price
+increase on standard tracks in underperforming genres, and protect TV
+Shows/Drama's premium pricing rather than discounting them to compete on
+volume they were never going to win on.
+
+**Tracks.** No individual track shows hit-level demand — the top 10 are
+essentially tied at 2-4 purchases each.
+Recommendation: put marketing and
+curation effort behind genre-level trends (Rock, and the TV Shows/Drama
+pricing angle above) rather than trying to manufacture a "hit song"
+campaign the data doesn't support.
+
+**Revenue trend.** Monthly revenue holds flat at ~$37.62/month across the
+entire 2021-2025 window — too consistent to be real organic business
+activity, and more likely a sign this is synthetic/demo data.
+Recommendation:
+if this were a live system, the next step would be pulling a fresh data
+export and re-running this trend before reporting it to stakeholders — flat
+revenue this consistent should be verified against the source, not presented
+at face value.
+
+**Purchasing behavior.** Every customer places exactly 7 orders, which means
+customer value here is driven entirely by average order value, not purchase
+frequency.
+Recommendation: if real purchase-frequency data becomes available,
+re-run this analysis — order frequency is normally a stronger loyalty signal
+than order value alone, and it's worth testing once the data actually
+supports it.
+
+**Country-level revenue.** USA leads on total revenue only because it has
+the most customers (13), not higher spend per customer — Czech Republic
+and Chile actually outperform on a per-customer basis, but each is based on
+just 1-2 customers.
+Recommendation: hold off on any market-expansion
+decision here until the customer sample for Czech Republic and Chile grows
+large enough to be statistically reliable — track it, don't act on it yet.
+
 ## What's in this repo
 
 | File | What it covers |
 |---|---|
-| `chinook_Data_Cleaning.sql` | Full data quality audit query set |
-| `Data_Quality_Summary.txt` | Written summary of audit findings |
-| `chinook_top_spending_customers.sql` | Top customer analysis |
-| `chinook_top_selling_tracks_genres.sql` | Genre and track performance |
-| `chinook_revenue_trend_over_time.sql` | Monthly/yearly revenue trend |
-| `chinook_purchasing__behavior.sql` | Order frequency, avg order value, revenue by country |
-| `Chinook_PostgreSql.sql` | Database schema and setup |
-| `ERD_Relationships.pgerd` | Entity relationship diagram |
+| [`chinook_Data_Cleaning.sql`](./chinook_Data_Cleaning.sql) | Full data quality audit query set |
+| [`data_quality_summary.txt`](./data_duality_summary.txt) | Written summary of audit findings |
+| [`chinook_top_spending_customers.sql`](./chinook_top_spending_customers.sql) | Top customer analysis |
+| [`chinook_top_selling_tracks_genres.sql`](./chinook_top_selling_tracks_genres.sql) | Genre and track performance |
+| [`chinook_revenue_trend_over_time.sql`](./chinook_revenue_trend_over_time.sql) | Monthly/yearly revenue trend |
+| [`chinook_purchasing_behavior.sql`](./chinook_purchasing_behavior.sql) | Order frequency, avg order value, revenue by country |
+| [`Chinook_PostgreSql.sql`](./Chinook_PostgreSql.sql) | Database schema and setup |
+| [`ERD_Relationships.pgerd`](./ERD_Relationships.pgerd) | Entity relationship diagram |
 
 ## Tools
 
