@@ -9,7 +9,7 @@ A SQL-based analysis of the Chinook digital music store database, covering
 data quality auditing, top customers, genre/track performance, revenue
 trends, and purchasing behavior — all built in PostgreSQL.
 
-#Business Problem
+# Business Problem
 1. Who are the top spending customer
 2. What is the  top sellinig tracks/genres
 3. what is the revenue over time
