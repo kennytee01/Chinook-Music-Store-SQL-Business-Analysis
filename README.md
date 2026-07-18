@@ -40,7 +40,7 @@ different length, so these are legitimate separate recordings that happen
 to share a name, not duplicate data entry. Nothing was removed.
 
 Full detail is in 
-| [`data_quality_summary.txt`](./data_duality_summary.txt) | Written summary of audit findings |
+| [`data_quality_summary.txt`](./data_quality_summary.txt) | Written summary of audit findings |
 
 
 ## What I found
@@ -170,7 +170,7 @@ large enough to be statistically reliable — track it, don't act on it yet.
 | File | What it covers |
 |---|---|
 | [`chinook_Data_Cleaning.sql`](./chinook_Data_Cleaning.sql) | Full data quality audit query set |
-| [`data_quality_summary.txt`](./data_duality_summary.txt) | Written summary of audit findings |
+| [`data_quality_summary.txt`](./data_quality_summary.txt) | Written summary of audit findings |
 | [`chinook_top_spending_customers.sql`](./chinook_top_spending_customers.sql) | Top customer analysis |
 | [`chinook_top_selling_tracks_genres.sql`](./chinook_top_selling_tracks_genres.sql) | Genre and track performance |
 | [`chinook_revenue_trend_over_time.sql`](./chinook_revenue_trend_over_time.sql) | Monthly/yearly revenue trend |
